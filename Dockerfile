@@ -26,7 +26,7 @@ ADD rootfs /
 RUN apk update \
     && apk upgrade \
     && apk --no-cache add --update -t deps wget unzip sqlite \
-    && apk --no-cache add nginx gnu-libiconv php7-common php7-fpm php7-curl \
+    && apk --no-cache add nginx gnu-libiconv php7 php7-common php7-fpm php7-curl \
                           php7-sqlite3 php7-pdo_sqlite php7-iconv php7-json \
                           php7-ctype php7-zip \
     && wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip \
