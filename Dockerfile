@@ -25,8 +25,10 @@ ADD rootfs /
 #------------------------------------------------------------------------------
 RUN apk update \
     && apk upgrade \
-    && apk --no-cache add --update -t deps wget unzip sqlite build-base tar re2c make file curl \
-    && apk --no-cache add nginx php7-common php7-fpm php7-curl php7-sqlite3 php7-pdo_sqlite php7-iconv php7-json php7-ctype php7-zip \
+    && apk --no-cache add --update -t deps wget unzip sqlite \
+    && apk --no-cache add nginx gnu-libiconv php7-common php7-fpm php7-curl \
+                          php7-sqlite3 php7-pdo_sqlite php7-iconv php7-json \
+                          php7-ctype php7-zip \
     && wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip \
     && unzip /tmp/tm-latest.zip -d /tmp/ \
     && mv /tmp/TorrentMonitor-master/* /data/htdocs \
@@ -35,11 +37,17 @@ RUN apk update \
     && ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log \
     && ln -sf /dev/stdout /var/log/php-fpm.log \
-    && rm /usr/bin/iconv \
-    && curl -SL http://ftpmirror.gnu.org/libiconv/libiconv-1.16.tar.gz | tar -xz -C /tmp \
-    && ./configure --prefix=/usr/local \
-    && make && make install \
     && apk del --purge deps; rm -rf /tmp/* /var/cache/apk/*
+#------------------------------------------------------------------------------
+# Build custom libiconv
+# because packaged one had gets() bug until version 1.14
+# No more needed since Alpine 3.10
+#------------------------------------------------------------------------------
+#    && rm /usr/bin/iconv \
+#    && curl -SL http://ftpmirror.gnu.org/libiconv/libiconv-1.16.tar.gz | tar -xz -C /tmp \
+#    && cd /tmp/libiconv-1.16 \
+#    && ./configure --prefix=/usr/local \
+#    && make && make install \
 
 #------------------------------------------------------------------------------
 # Set labels:
