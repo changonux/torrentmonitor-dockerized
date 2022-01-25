@@ -47,3 +47,4 @@ jobs:
           labels: |
             dependencies
             github_actions
+            release
