@@ -11,7 +11,6 @@ RUN apk --no-cache add \
         && \
     wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip && \
     unzip /tmp/tm-latest.zip -d /tmp/ && \
-    patch -p1 -d /tmp -i /tmp/tm_ext_settings_fix.patch && \
     mv /tmp/TorrentMonitor-master/* /rootfs/data/htdocs && \
     cat /rootfs/data/htdocs/db_schema/sqlite.sql | sqlite3 /rootfs/data/htdocs/db_schema/tm.sqlite && \
     mkdir -p /rootfs/var/log/nginx/
