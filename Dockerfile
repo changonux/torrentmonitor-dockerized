@@ -3,14 +3,13 @@ FROM alpine:3.15.6 as rootfs-builder
 
 COPY rootfs/ /rootfs/
 COPY patches/ /tmp/
+ADD http://korphome.ru/torrent_monitor/tm-latest.zip /tmp/tm-latest.zip
 
 RUN apk --no-cache add \
-        wget \
         unzip \
         sqlite \
         patch \
         && \
-    wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip && \
     unzip /tmp/tm-latest.zip -d /tmp/ && \
     mv /tmp/TorrentMonitor-master/* /rootfs/data/htdocs && \
     cat /rootfs/data/htdocs/db_schema/sqlite.sql | sqlite3 /rootfs/data/htdocs/db_schema/tm.sqlite && \
