@@ -68,7 +68,7 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.image_tag }}
 
       - name: Build and push ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
-        if: ${{ env.tag == 'true' }}
+        if: ${{ env.is_tag == 'true' }}
         uses: docker/build-push-action@v3.2.0
         with:
           platforms: ${{ env.PLATFORMS }}
@@ -78,7 +78,7 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
 
       - name: Update repo description
-        if: ${{ env.tag == 'true' }}
+        if: ${{ env.is_tag == 'true' }}
         uses: peter-evans/dockerhub-description@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
