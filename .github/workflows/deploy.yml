@@ -29,7 +29,7 @@ jobs:
           if [[ ${BRANCH_NAME} == "master" ]]; then
             IMAGE_TAG="devel"
           else
-            IMAGE_TAG=${BRANCH_NAME:1}
+            IMAGE_TAG=${BRANCH_NAME}
           fi
 
           echo "image_tag=${IMAGE_TAG}" >> $GITHUB_ENV
