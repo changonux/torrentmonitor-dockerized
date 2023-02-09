@@ -3,7 +3,7 @@ FROM alpine:3.15.6 as rootfs-builder
 
 COPY rootfs/ /rootfs/
 COPY patches/ /tmp/
-ADD http://korphome.ru/torrent_monitor/tm-latest.zip /tmp/tm-latest.zip
+ADD http://tormon.ru/tm-latest.zip /tmp/tm-latest.zip
 
 RUN apk --no-cache add \
         unzip \
