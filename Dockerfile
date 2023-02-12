@@ -25,7 +25,6 @@ ENV VERSION="2.0.3" \
     CRON_COMMAND="php -q /data/htdocs/engine.php >> /var/log/nginx/torrentmonitor_cron_error.log 2>&1" \
     PHP_TIMEZONE="UTC" \
     PHP_MEMORY_LIMIT="512M" \
-    LD_PRELOAD="/usr/lib/preloadable_libiconv.so"
 
 COPY --from=rootfs-builder /rootfs/ /
 
@@ -61,3 +60,12 @@ WORKDIR /
 EXPOSE 80
 
 ENTRYPOINT ["/init"]
+
+# to do
+# 1. PUID/PGID
+# 2. php variables
+# 3. php conf update script
+# 4. php.ini correct
+# 5. openrc 
+# 6. logs
+
