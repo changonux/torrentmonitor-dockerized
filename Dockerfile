@@ -11,7 +11,6 @@ RUN apk --no-cache add \
         patch \
         && \
     unzip /tmp/tm-latest.zip -d /tmp/ && \
-	patch -p1 -d /tmp -i /tmp/workaround-fix-k-me.patch && \
     mv /tmp/TorrentMonitor-master/* /rootfs/data/htdocs && \
     cat /rootfs/data/htdocs/db_schema/sqlite.sql | sqlite3 /rootfs/data/htdocs/db_schema/tm.sqlite && \
     mkdir -p /rootfs/var/log/nginx/
