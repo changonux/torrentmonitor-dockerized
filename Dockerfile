@@ -48,9 +48,8 @@ RUN apk --no-cache add \
         php7-dom \
         && \
     apk add gnu-libiconv=1.15-r3 --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.13/community/ && \
-    ln -sf /dev/stdout /var/log/nginx/access.log && \
-    ln -sf /dev/stderr /var/log/nginx/error.log && \
-    ln -sf /dev/stdout /var/log/php-fpm.log
+    ln -sf /dev/stdout /var/log/tm-autorun && \
+    ln -sf /dev/stderr /var/log/php-fpm.log
 
 LABEL ru.korphome.version="${VERSION}" \
       ru.korphome.release-date="${RELEASE_DATE}"
