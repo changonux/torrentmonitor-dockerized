@@ -63,9 +63,8 @@ ENTRYPOINT ["/init"]
 
 # to do
 # -1. PUID/PGID
-# 2. php variables
-# 3. php conf update script
+# -2. php variables
+# -3. php conf update script
 # -4. php.ini correct
-# -5. openrc 
-# -6. logs
+# -5. logs
 
