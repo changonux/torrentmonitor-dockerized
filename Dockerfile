@@ -60,11 +60,3 @@ WORKDIR /
 EXPOSE 80
 
 ENTRYPOINT ["/init"]
-
-# to do
-# -1. PUID/PGID
-# -2. php variables
-# -3. php conf update script
-# -4. php.ini correct
-# -5. logs
-
