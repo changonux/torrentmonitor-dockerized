@@ -37,12 +37,6 @@ jobs:
 
           echo "Action branch=${BRANCH_NAME} tag=${IS_TAG} ref=${GITHUB_REF} image_tag=${IMAGE_TAG}"
 
-      - name: Login to DockerHub
-        uses: docker/login-action@v2.1.0
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2.1.0
         with:
@@ -64,7 +58,6 @@ jobs:
           platforms: ${{ env.PLATFORMS }}
           push: true
           tags: |
-            ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.image_tag }}
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.image_tag }}
 
       - name: Build and push ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
@@ -74,17 +67,7 @@ jobs:
           platforms: ${{ env.PLATFORMS }}
           push: true
           tags: |
-            ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
-
-      - name: Update repo description
-        if: ${{ env.is_tag == 'true' }}
-        uses: peter-evans/dockerhub-description@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
-          short-description: ${{ github.event.repository.description }}
 
       - name: Skip Telegram notification
         shell: bash
@@ -104,6 +87,4 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
               New Docker image is built and pushed:
-              ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.image_tag }}
-
-              https://hub.docker.com/r/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+              ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.image_tag }}
