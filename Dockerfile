@@ -18,6 +18,7 @@ RUN apk --no-cache add \
 # Main image
 FROM alpine:3.15.6
 MAINTAINER Alexander Fomichev <fomichev.ru@gmail.com>
+LABEL org.opencontainers.image.source="https://github.com/changonux/torrentmonitor-dockerized/"
 
 ENV VERSION="2.0.5" \
     RELEASE_DATE="" \
