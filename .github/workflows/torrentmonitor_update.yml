@@ -2,7 +2,7 @@ name: Update TorrentMonitor version
 
 on:
   schedule:
-    - cron: 58 * * * *
+    - cron: '*/20 * * * *'
 
 jobs:
   update_torrentmonitor:
